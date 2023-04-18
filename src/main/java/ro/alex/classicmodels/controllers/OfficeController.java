@@ -28,6 +28,7 @@ public class OfficeController {
 
 	@GetMapping("/all")
 	public Iterable<Office> findAllOfficesDb() {
+		// Logger.log(LEVEL.WARNING, "Problem here");
 		return theDao.findAll();
 	}
 
@@ -60,6 +61,9 @@ public class OfficeController {
 
 	@PostMapping("/save")
 	public Office saveOffice(@RequestBody Office officeNew) {
+		if(officeNew.getCity() == null || officeNew.getCity().isEmpty()) {
+			throw new RuntimeException("City name cannot be null or empty");
+		}
 		return theDao.save(officeNew);
 	}
 

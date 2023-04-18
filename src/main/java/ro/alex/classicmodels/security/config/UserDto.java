@@ -1,8 +1,8 @@
 package ro.alex.classicmodels.security.config;
 
+
 public class UserDto {
 
-	private String email;
 	private String password;
 	private String username;
 	
@@ -10,13 +10,7 @@ public class UserDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 
 	public String getPassword() {
 		return password;

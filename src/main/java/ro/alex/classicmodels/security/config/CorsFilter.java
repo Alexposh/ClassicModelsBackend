@@ -1,4 +1,6 @@
 package ro.alex.classicmodels.security.config;
+
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -15,9 +17,9 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@Order(Ordered.HIGHEST_PRECEDENCE)
-//@WebFilter("/")
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
+@WebFilter("/*")
 public class CorsFilter implements Filter {
 
     public CorsFilter() {
@@ -25,18 +27,18 @@ public class CorsFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        System.out.println("DOING FITER!!!");
+    	System.out.println("DOING FITER!!!");
         final HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Allow-Headers", "*"); // TODO: always check headers
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization, content-type"); // TODO: always check headers
         response.setHeader("Access-Control-Max-Age", "3600");
         // application/x-www-form-urlencoded;charset=UTF-8
         if ("OPTIONS".equalsIgnoreCase(((HttpServletRequest) req).getMethod())) {
-            System.out.println("OPTIONS PREFLIGHT CHECK");
+        	System.out.println("OPTIONS PREFLIGHT CHECK");
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            System.out.println("DOING FILTER AGAIN");
+        	System.out.println("DOING FILTER AGAIN");
             chain.doFilter(req, res);
         }
     }

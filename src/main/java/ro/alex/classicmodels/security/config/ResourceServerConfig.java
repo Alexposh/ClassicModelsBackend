@@ -1,5 +1,6 @@
 package ro.alex.classicmodels.security.config;
 
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -20,13 +21,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().cors().disable().
+        http.
                 anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/secured/**").authenticated()
-                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler())
-                ;
+                .antMatchers("/rest/**").authenticated()
+                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 
 }
-

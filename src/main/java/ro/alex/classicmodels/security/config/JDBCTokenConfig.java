@@ -1,5 +1,6 @@
 package ro.alex.classicmodels.security.config;
 
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -13,16 +14,16 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 public class JDBCTokenConfig {
 	
 	@Value("${spring.datasource.url}")
-	private String datasourceUrl;
+	private String datasourceUrl;// = "jdbc:mysql://localhost:3308/springsecurityoauth2";
 
 	@Value("${spring.datasource.driver-class-name}")
-	private String dbDriverClassName;
+	private String dbDriverClassName; // = "com.mysql.cj.jdbc.Driver";
 
 	@Value("${spring.datasource.username}")
-	private String dbUsername;
+	private String dbUsername;// ; = "root";
 
 	@Value("${spring.datasource.password}")
-	private String dbPassword;
+	private String dbPassword;// = "root";
 
 	@Bean
 	public DataSource dataSource() {
@@ -31,7 +32,6 @@ public class JDBCTokenConfig {
 		dataSource.setUrl(datasourceUrl);
 		dataSource.setUsername(dbUsername);
 		dataSource.setPassword(dbPassword);
-		
 		return dataSource;
 	}
 
